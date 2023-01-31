@@ -6,7 +6,7 @@ workflows:
     environment:
       groups:
         - keystore_credentials
-        - app_store credentials
+        - app_store_credentials
         - manual_cert_credentials
         - firebase_credentials
         - other
@@ -15,26 +15,31 @@ workflows:
       flutter: stable
     cache:
       cache_paths:
-      - $HOME/.gradle/caches
-      - $FLUTTER_ROOT/.pub-cache
-      - $HOME/Library/Caches/Cocoapods
-      - $CM_BUILD_DIR/node_modules
+        - $HOME/.gradle/caches
+        - $FLUTTER_ROOT/.pub-cache
+        - $HOME/Library/Caches/Cocoapods
+        - $CM_BUILD_DIR/node_modules
     triggering:
       events:
         - push
         - pull_request
         - tag
-  scripts:
-    - name: Report build start
-      script: # build started
-    - name: Get fluttter Packages
-      script: flutter packages pub get
-    - name: Build APK
-      script: flutter build apk --release
-    - name: Test
-      script: flutter test
-    - name: Build finished successfully
-      script: touch ~/SUCCESS
+    steps:
+      - name: Report build start
+        script: |
+          echo "Build started"
+
+      - name: Get flutter Packages
+        script: flutter packages pub get
+
+      - name: Build APK
+        script: flutter build apk --release
+
+      - name: Test
+        script: flutter test
+
+      - name: Build finished successfully
+        script: touch ~/SUCCESS
     artifacts:
       - build/app/outputs/apk/release/*.apk
     code_signing:
@@ -45,21 +50,21 @@ workflows:
     publishing:
       email:
         recipients:
-          -kevin@nevercode.io
+          - kevin@nevercode.io
       scripts:
         - name: Check for apk
-            script: | 
-              apkPath=$(find build -name "*.apk" | head -1)
-              if [[ -z ${apkPath} ]]
-              then
-                echo "No .apk were found"
-              else
-                echo "Publishing .apk artifacts"
-              fi
+          script: |
+            apkPath=$(find build -name "*.apk" | head -1)
+            if [[ -z ${apkPath} ]]; then
+              echo "No .apk files were found"
+            else
+              echo "Publishing .apk artifacts"
+            fi
+
         - name: Report build status
-            script: | 
-              if [ -a "~/SUCCESS" ] ; then
-                # build successful
-              else
-                # build failed
-              fi    
+          script: |
+            if [ -a ~/SUCCESS ]; then
+              echo "Build successful"
+            else
+              echo "Build failed"
+            fi    
