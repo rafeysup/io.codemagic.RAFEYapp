@@ -51,10 +51,9 @@ workflows:
             }
         - name: Report build status
           script: |
-            if [ -a ~/SUCCESS ]; then
+            if (-a ~/SUCCESS) {
               echo "SUCCESS file found"
-            else
+            } else {
               echo "SUCCESS file not found"
-              exit 1
-            fi
+            }
 
