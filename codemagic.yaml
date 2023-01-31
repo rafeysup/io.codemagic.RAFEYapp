@@ -44,15 +44,17 @@ workflows:
         - name: Check for apk
           script: |
             apkPath=$(find build -name "*.apk" | head -1)
-            if [[ -z "$apkPath" ]]; then
-              echo "No .apk files were found"
-            else
+            if ($apkPath -eq $null) {
+              echo "No .apk were found"
+            } else {
               echo "Publishing .apk artifacts"
-            fi
+            }
         - name: Report build status
           script: |
             if [ -a ~/SUCCESS ]; then
-              echo "Build successful"
+              echo "SUCCESS file found"
             else
-              echo "Build failed"
+              echo "SUCCESS file not found"
+              exit 1
             fi
+
