@@ -24,9 +24,9 @@ workflows:
         - push
         - pull_request
         - tag
-    steps:
+    scripts:
       - name: Report build start
-        script: |
+        scripts: |
           echo "Build started"
 
       - name: Get flutter Packages
