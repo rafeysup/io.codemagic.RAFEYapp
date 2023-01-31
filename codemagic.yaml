@@ -1,4 +1,3 @@
-# codemagic.yaml
 workflows:
   build-and-test:
     name: Build and Test
@@ -11,7 +10,7 @@ workflows:
         - firebase_credentials
         - other
       vars:
-        GOOGLE_PLAY_TRACK: "beta"
+        GOOGLE_PLAY_TRACK: beta
       flutter: stable
     cache:
       cache_paths:
@@ -26,18 +25,13 @@ workflows:
         - tag
     scripts:
       - name: Report build start
-        scripts: |
-          echo "Build started"
-
-      - name: Get flutter Packages
+        script: echo "Build started"
+      - name: Get flutter packages
         script: flutter packages pub get
-
       - name: Build APK
         script: flutter build apk --release
-
       - name: Test
         script: flutter test
-
       - name: Build finished successfully
         script: touch ~/SUCCESS
     artifacts:
@@ -46,7 +40,7 @@ workflows:
       certificates:
         - distribution
       signing_profiles:
-        android: my_android_profile  
+        android: my_android_profile
     publishing:
       email:
         recipients:
@@ -55,16 +49,15 @@ workflows:
         - name: Check for apk
           script: |
             apkPath=$(find build -name "*.apk" | head -1)
-            if [[ -z ${apkPath} ]]; then
+            if [[ -z "$apkPath" ]]; then
               echo "No .apk files were found"
             else
               echo "Publishing .apk artifacts"
             fi
-
         - name: Report build status
           script: |
             if [ -a ~/SUCCESS ]; then
               echo "Build successful"
             else
               echo "Build failed"
-            fi    
+            fi
