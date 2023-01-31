@@ -16,10 +16,8 @@ workflows:
       flutter: stable
     cache:
       cache_paths:
-        - $HOME/.gradle/caches
         - $FLUTTER_ROOT/.pub-cache
-        - $HOME/Library/Caches/Cocoapods
-        - $CM_BUILD_DIR/node_modules
+        - $HOME/.gradle/caches        
     triggering:
       events:
         - push
