@@ -2,11 +2,14 @@
 workflows:
   build-and-test:
     name: Build and Test
-    instance_type: windows
+    instance_type: windows_x2
     environment:
       groups:
         - keystore_credentials
         - app_store credentials
+        - manual_cert_credentials
+        - firebase_credentials
+        - other
       vars:
         GOOGLE_PLAY_TRACK: "beta"
       flutter: stable
@@ -22,15 +25,41 @@ workflows:
         - pull_request
         - tag
   scripts:
+    - name: Report build start
+      script: # build started
     - name: Get fluttter Packages
-    script: flutter packages pub get
+      script: flutter packages pub get
     - name: Build APK
-    script: flutter build apk --release
+      script: flutter build apk --release
     - name: Test
-    script: flutter test
+      script: flutter test
+    - name: Build finished successfully
+      script: touch ~/SUCCESS
     artifacts:
-      - build/app/outputs/**/*.apk
+      - build/app/outputs/apk/release/*.apk
+    code_signing:
+      certificates:
+        - distribution
+      signing_profiles:
+        android: my_android_profile  
     publishing:
       email:
         recipients:
           -kevin@nevercode.io
+      scripts:
+        - name: Check for apk
+            script: | 
+              apkPath=$(find build -name "*.apk" | head -1)
+              if [[ -z ${apkPath} ]]
+              then
+                echo "No .apk were found"
+              else
+                echo "Publishing .apk artifacts"
+              fi
+        - name: Report build status
+            script: | 
+              if [ -a "~/SUCCESS" ] ; then
+                # build successful
+              else
+                # build failed
+              fi    
