@@ -1,0 +1,36 @@
+# codemagic.yaml
+workflows:
+  build-and-test:
+    name: Build and Test
+    instance_type: windows
+    environment:
+      groups:
+        - keystore_credentials
+        - app_store credentials
+      vars:
+        GOOGLE_PLAY_TRACK: "beta"
+      flutter: stable
+    cache:
+      cache_paths:
+      - $HOME/.gradle/caches
+      - $FLUTTER_ROOT/.pub-cache
+      - $HOME/Library/Caches/Cocoapods
+      - $CM_BUILD_DIR/node_modules
+    triggering:
+      events:
+        - push
+        - pull_request
+        - tag
+  scripts:
+    - name: Get fluttter Packages
+    script: flutter packages pub get
+    - name: Build APK
+    script: flutter build apk --release
+    - name: Test
+    script: flutter test
+    artifacts:
+      - build/app/outputs/**/*.apk
+    publishing:
+      email:
+        recipients:
+          -kevin@nevercode.io
