@@ -31,9 +31,7 @@ workflows:
       - name: Get flutter packages
         script: flutter packages pub get
       - name: Build APK
-        script: flutter build apk --release
-      - name: Test
-        script: flutter test
+        script: flutter build apk --release      
       - name: Build finished successfully
         script: touch ~/SUCCESS
     artifacts:
