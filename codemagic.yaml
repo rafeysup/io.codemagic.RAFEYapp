@@ -13,11 +13,7 @@ workflows:
         - other
       vars:
         GOOGLE_PLAY_TRACK: beta
-      flutter: stable
-    cache:
-      cache_paths:
-        - $FLUTTER_ROOT/.pub-cache
-        - $HOME/.gradle/caches        
+      flutter: stable       
     triggering:
       events:
         - push
