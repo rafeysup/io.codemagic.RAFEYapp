@@ -17,13 +17,7 @@ workflows:
         - push
         - pull_request
         - tag
-    scripts:
-      -name: Pre-build script 1
-        script: echo $ANDROID_FIREBASE_CONFIG | base64 --decode > $CM_BUILD_DIR/android/app/google-services.json
-      -name: Pre-build script 2
-        script: echo Decoded google-services.json! Here is the directory after.
-      -name: Pre-build script 3
-        script: ls $CM_BUILD_DIR/android/app
+    scripts:      
       - name: Get Flutter packages
         script: |
           flutter packages pub get
