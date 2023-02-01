@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(const MyApp());
+
+void main() {
+    Crashlytics.instance.enableInDevMode = true;
+    FlutterError.onError = Crashlytics.instance.recordFlutterError;
+    runApp(const MyApp());
+}
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
