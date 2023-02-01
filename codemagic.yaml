@@ -20,12 +20,12 @@ workflows:
         script: echo "Build started"
       - name: Get flutter packages
         script: flutter packages pub get
-      - name: Build APK
+      - name: Build Flutter APK
         script: flutter build apk --release      
       - name: Build finished successfully
         script: touch ~/SUCCESS
     artifacts:
-      - build/app/outputs/apk/release/*.apk    
+      - app/build/outputs/**/**/*.apk    
     publishing:
       firebase:       
         firebase_service_account: $FIREBASE_SERVICE_ACCOUNT
@@ -33,6 +33,7 @@ workflows:
           app_id: 1:309742552743:android:0c5a96065ccef3094dbd82
           groups: 
             - androidTesters
+          artifact_type: 'apk'
       email:
         recipients:
           - rafey93@gmail.com
