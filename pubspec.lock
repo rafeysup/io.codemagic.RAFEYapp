@@ -129,14 +129,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
-  firebase_core_web:
-    dependency: transitive
-    description:
-      name: firebase_core_web
-      sha256: "6306ab08d30b386e73d8af1d41f93bf59814f96850f527166f324125e600ea4c"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.1.1+2"
   flutter:
     dependency: "direct main"
     description: flutter
