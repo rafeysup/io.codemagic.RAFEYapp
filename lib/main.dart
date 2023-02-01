@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 
-void main() {
-    Crashlytics.instance.enableInDevMode = true;
-    FlutterError.onError = Crashlytics.instance.recordFlutterError;
+void main() {    
     runApp(const MyApp());
 }
 
