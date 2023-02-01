@@ -23,9 +23,9 @@ workflows:
       - name: Build Flutter APK
         script: flutter build apk --release      
       - name: Build finished successfully
-        script: touch ~/SUCCESS
+        script: ~/SUCCESS
     artifacts:
-      - app/build/outputs/**/**/*.apk    
+      - build/app/outputs/flutter-apk/app-release.apk    
     publishing:
       firebase:       
         firebase_service_account: $FIREBASE_SERVICE_ACCOUNT
