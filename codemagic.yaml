@@ -5,12 +5,13 @@ workflows:
     environment:
       android_signing:
           - testreference
-      groups:
-        - keystore_credentials        
+      groups:                
         - firebase_credentials       
       vars:
         GOOGLE_PLAY_TRACK: beta
-      flutter: stable       
+      flutter: stable
+      xcode: latest
+      cocoapods: default       
     triggering:
       events:
         - push
