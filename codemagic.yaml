@@ -36,9 +36,9 @@ workflows:
           ignore_failure: true
       - name: Build Android APK
         working_directory: android
-        script: ./gradlew assembleRelease
+        script: flutter build apk --release
     artifacts:
-      - app/build/outputs/**/**/*.apk
+      - build/app/outputs/flutter-apk/app-release.apk
       - build/**/outputs/**/mapping.txt
       - flutter_drive.log     
     publishing:
