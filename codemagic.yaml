@@ -21,9 +21,7 @@ workflows:
       - name: Get flutter packages
         script: flutter packages pub get
       - name: Build Flutter APK
-        script: flutter build apk --release      
-      - name: Build finished successfully
-        script: ~/SUCCESS
+        script: flutter build apk --release
     artifacts:
       - build/app/outputs/flutter-apk/app-release.apk    
     publishing:
@@ -36,20 +34,4 @@ workflows:
       email:
         recipients:
           - rafey93@gmail.com
-      scripts:
-        - name: Check for apk
-          script: |
-            apkPath=$(find build -name "*.apk" | head -1)
-            if ($apkPath -eq $null) {
-              echo "No .apk were found"
-            } else {
-              echo "Publishing .apk artifacts"
-            }
-        - name: Report build status
-          script: |
-            if (-a ~/SUCCESS) {
-              echo "SUCCESS file found"
-            } else {
-              echo "SUCCESS file not found"
-            }
-
+      
