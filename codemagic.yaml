@@ -17,13 +17,7 @@ workflows:
         - push
         - pull_request
         - tag
-    scripts:
-      - name: Set up key properties
-        script: |
-          echo $CM_KEYSTORE | base64 --decode > $CM_KEYSTORE_PATH
-      - name: Set up local properties
-        script: |
-          echo "flutter.sdk=$HOME/programs/flutter" > "$CM_BUILD_DIR/android/local.properties"
+    scripts:      
       - name: Get Flutter packages
         script: |
           flutter packages pub get
