@@ -38,7 +38,7 @@ workflows:
         working_directory: android
         script: flutter build apk --release
     artifacts:
-      - build/app/outputs/flutter-apk/app-release.apk
+      - app/build/outputs/**/**/*.apk
       - build/**/outputs/**/mapping.txt
       - flutter_drive.log     
     publishing:
@@ -47,7 +47,8 @@ workflows:
         android:          
           app_id: 1:309742552743:android:0c5a96065ccef3094dbd82
           groups: 
-            - androidTesters          
+            - androidTesters
+          artifact_type: 'apk'            
       email:
         recipients:
           - rafey93@gmail.com
