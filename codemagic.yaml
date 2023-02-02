@@ -43,7 +43,7 @@ workflows:
       - flutter_drive.log     
     publishing:
       firebase:       
-        FIREBASE_TOKEN: $FIREBASE_TOKEN
+        firebase_token: $FIREBASE_TOKEN
         android:          
           app_id: 1:309742552743:android:0c5a96065ccef3094dbd82
           groups: 
