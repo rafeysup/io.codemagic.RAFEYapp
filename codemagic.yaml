@@ -47,8 +47,7 @@ workflows:
         android:          
           app_id: 1:309742552743:android:0c5a96065ccef3094dbd82
           groups: 
-            - androidTesters
-          artifact_type: 'apk'            
+            - androidTesters                    
       email:
         recipients:
           - rafey93@gmail.com
