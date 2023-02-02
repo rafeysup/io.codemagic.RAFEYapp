@@ -38,7 +38,7 @@ workflows:
         working_directory: android
         script: flutter build apk --release
     artifacts:
-      - app/build/outputs/**/**/*.apk
+      - build/app/outputs/**/**/*.apk
       - build/**/outputs/**/mapping.txt
       - flutter_drive.log     
     publishing:
