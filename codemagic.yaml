@@ -32,8 +32,7 @@ workflows:
           flutter analyze
       - name: Flutter unit tests
         script: |
-          flutter test
-          ignore_failure: true
+          flutter test          
       - name: Build Android APK
         working_directory: android
         script: flutter build apk --release
