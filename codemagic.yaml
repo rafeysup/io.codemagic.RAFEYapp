@@ -35,7 +35,7 @@ workflows:
           flutter test          
       - name: Build Android APK
         working_directory: android
-        script: flutter build apk --release
+        script: flutter build apk --release --build-name=1.0.5
     artifacts:
       - build/app/outputs/**/**/*.apk
       - build/**/outputs/**/mapping.txt
