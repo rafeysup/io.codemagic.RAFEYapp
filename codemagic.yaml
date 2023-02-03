@@ -1,7 +1,7 @@
 workflows:
   build-and-test:
     name: Build and Test
-    instance_type: windows_x2
+    instance_type: mac_mini_m1
     environment:
       android_signing:
           - testreference
